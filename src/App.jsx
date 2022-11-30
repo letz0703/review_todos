@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-
 import './App.css'
 import ListTodos from "./components/list_todos/list_todos"
 
@@ -10,6 +9,7 @@ function App () {
   ] )
 
   const [inputTask, setInputTask] = useState( '' )
+
   const handleInputChange = ( e ) => {
     setInputTask( e.target.value )
   }
@@ -19,9 +19,15 @@ function App () {
     setInputTask( '' )
   }
 
+  const handleDelete = ( task ) => {
+    // setTodos( [...todos, { id: 3, task: task.task }] )
+    // console.log( task )
+    setTodos( todos.filter( todo => ( todo.task !== task ) ) )
+  }
+
   return (
     <div className='App'>
-      <ListTodos todos={todos} />
+      <ListTodos todos={todos} onDelete={handleDelete} />
       <input type="text" value={inputTask} onChange={handleInputChange} />
       <button className="btn_add" onClick={handleClick_add}>Add</button>
     </div>
